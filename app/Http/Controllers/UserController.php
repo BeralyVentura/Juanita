@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateStoreUserRequest;
 use App\Http\Resources\UserResource;
@@ -37,5 +36,13 @@ class UserController extends Controller
     {
 
         return response()->json(UserResource::make($user));
+    }
+    public function update(UpdateStoreUserRequest $request, User $user)
+    {
+        $data = $request->validated();
+        $user->update($data);
+ 
+        return response()->json(UserResource::make($user));
+ 
     }
 }
